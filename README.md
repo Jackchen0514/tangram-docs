@@ -4,4 +4,4 @@
 
 This repo stores the source files for our documentation site:
 
-## 👉 https://tangrams.readthedocs.io/ 👈
+## 👉 https://tangram.xinsichen.com 👈

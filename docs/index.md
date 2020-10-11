@@ -1,4 +1,4 @@
-[Tangram](https://github.com/tangrams/tangram) is a flexible mapping engine, designed for real-time rendering of 2D and 3D maps from vector tiles. Built around [OpenStreetMap](http://www.openstreetmap.org/) data, Tangram provides optional control over almost every aspect of the map-making process, including cartography, lighting, and geometry customization.
+[Tangram](https://github.com/tangrams/tangram) 是一个灵活的地图引擎, 设计用于从矢量图块实时渲染2D和3D地图. Built around [OpenStreetMap](http://www.openstreetmap.org/) data, Tangram 可对地图制作过程的几乎每个方面提供可选控制，包括制图，照明和几何图形定制。
 
 Map styles, data filters, labels, and even graphics card code can be defined in a human-readable and -writable plain-text [scene file](Overviews/Scene-File.md), and APIs permit direct interactive control of the style. Changing the color is just the beginning; every Tangram map is a 3D scene, so you also can modify [lights](Overviews/Lights-Overview.md) and [cameras](Overviews/Cameras-Overview.md).
 
