@@ -1,3 +1,3 @@
-*To learn how to get started with the Tangram Android SDK see the [Android Walkthrough](https://tangrams.readthedocs.io/en/master/Tutorials/android-walkthrough/).*
+*要了解如何开始使用Tangram Android SDK，请参阅 [Android Walkthrough](https://tangrams.readthedocs.io/en/master/Tutorials/android-walkthrough/).*
 
-*To see reference documentation for the SDK, go to the [javadoc](android-sdk/0.11.0/index.html).*
+*要查看SDK的参考文档，请转到 [javadoc](android-sdk/0.11.0/index.html).*
