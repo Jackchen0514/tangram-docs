@@ -1,19 +1,19 @@
-*This is a conceptual overview of Tangram's cameras. For a complete technical reference of camera configuration and parameters, see [cameras](../Syntax-Reference/cameras.md).*
+*这是tangram相机的概念概述. 提供完整的相机配置和参数技术参考, 请看 [cameras](../Syntax-Reference/cameras.md).*
 
-To control the view of the data being mapped, Tangram uses cameras similar to those found in other 3D applications and libraries, with a few twists to accommodate web map conventions.
+为了控制被映射数据的视图，Tangram使用了类似于其他3D应用程序和库中的相机，只是做了一些调整以适应web地图的约定。
 
-Most 2D web maps control their view area with a "zoom level", which sets the viewable area of a map and determines which map tiles to load. However, in most 3D contexts (including real life), what you see through a camera is dependent on its position, focal length, and field of view, and there isn't a strict analogue to zoom level.
+大多数2D web地图使用“zoom level”来控制其视图区域，它设置地图的可查看区域，并决定要加载哪个地图块。然而，在大多数3D环境中(包括现实生活)，你通过相机看到的东西取决于它的位置、焦距和视场，并且没有一个严格的模拟变焦水平。
 
-To support zoom levels in a 3D context, our perspective camera allows position, field of view, and zoom level to be interdependent – each parameter can affect the others in ways that 3D cameras don't normally allow.
+为了在3D环境中支持变焦级别，我们的透视相机允许位置、视场和变焦级别相互依赖——每个参数都可以以3D相机通常不允许的方式影响其他参数。
 
-Apart from this, our cameras should be recognizable to anyone familiar with 3D. (You can't currently rotate or tilt our cameras.)
+除此之外，任何熟悉3D的人都应该能认出我们的相机。(你目前还不能旋转或倾斜相机。)
 
 ## Camera types
 
-Tangram has three camera types: `perspective`, `isometric`, and `flat`. In most ways they are like typical 3D cameras, with some limitations and enhancements to make them better suited to displaying maps. For instance, because Tangram JS is a Leaflet plugin, for now you can't tilt or rotate the cameras. Also, their position is set with _[lat, long, zoom]_ instead of 3D coordinates.
+七巧板有三种类型的相机：`perspective`，`isometric`，和`flat`。在大多数方面，它们都类似于典型的3D相机，但有一些限制和增强，使其更适合显示地图。例如，由于七巧板JS是Leaflet插件，因此目前您无法倾斜或旋转相机。另外，它们的位置是用[lat，long，zoom]而不是3D坐标设置的。
 
 ### perspective camera
-The **perspective** camera is the most like a 3D camera, but with some unique parameters, including `focal_length` and `vanishing_point`.
+**perspective**透视相机是最像的3D相机，但也有一些独特的参数，包括`focal_length`和`vanishing_point`。
 
 ```yaml
 cameras:
@@ -24,15 +24,15 @@ cameras:
 [ ![](../images/cameras-perspective.jpg) ](http://tangrams.github.io/tangram-frame/?url=http://tangrams.github.io/tangram-docs/cameras/perspective.yaml)
 
 #### `focal_length`
-The `focal_length` parameter is connected to the camera's height, and they modify each other in order to maintain a consistent view area. This allows the "zoom level" of a particular map view to remain constant unless changed directly. (You might know this trick as a "[dolly zoom](https://en.wikipedia.org/wiki/Dolly_zoom)", first used in Hitchcock's _Vertigo_.)
+该`focal_length`参数被连接到相机的高度，并且它们修改彼此，以保持一致的视图区域。除非直接更改，否则特定地图视图的“缩放级别”可以保持不变。(您可能将此技巧称为 "[dolly zoom](https://en.wikipedia.org/wiki/Dolly_zoom)", 最初在希区柯克的《眩晕》中使用。)
 
-The effect of changing the `focal_length` is therefore identical to scaling the height of all 3D objects in the scene, but without changing the geometry at all.
+因此，更改的效果`focal_length`与缩放场景中所有3D对象的高度相同，但根本不更改几何形状。
 
-Here's a diagram of a typical perspective view:  
+这是一个典型透视图的图：
 ![](../images/perspective.jpg)
 ![](../images/perspective-view.jpg)
 
-With our perspective camera, if you decrease the `focal_length`, the camera will move toward the model, to keep the field of view consistent:  
+使用我们的透视相机，如果减小focal_length，相机将朝模型移动，以保持视野一致：  
 ![](../images/zoom.jpg)
 ![](../images/zoom-view.jpg)
 
@@ -46,7 +46,7 @@ cameras:
 [ ![](../images/cameras-focal_length.jpg) ](http://tangrams.github.io/tangram-docs/map/?cameras/focal_length.yaml)
 
 #### `vanishing_point`
-The perspective camera also allows the apparent origin of perspective (aka the vanishing point) to be changed – this produces an effect you would normally only get by pointing the camera somewhere else and cropping the resulting view.
+透视相机还允许更改透视的表观原点（即消失点），这通常只能通过将相机指向其他位置并裁剪生成的视图来产生效果。
 
 ```yaml
 cameras:
@@ -59,7 +59,7 @@ cameras:
 
 ### isometric camera
 
-Also called an orthographic or parallel projection, the **isometric** camera can be thought of as a perspective camera with an infinitely long focal length. It produces a flattened perspective that can resemble satellite photos, or the view through a telephoto lens.
+**isometric**等距相机也称为正交投影或平行投影，可以认为是具有无限长焦距的透视相机。它产生了可以像卫星照片或远摄镜头一样的扁平视角。
 
 ![](../images/isometric.jpg)
 ![](../images/isometric-view.jpg)
@@ -73,7 +73,7 @@ cameras:
 ```
 #### axis
 
-The isometric camera allows modification to the orthographic axis, to produce effects which would normally require moving and rotating the camera.
+等距相机允许修改正交轴，以产生通常需要移动和旋转相机的效果。
 
 ```yaml
 cameras:
@@ -86,7 +86,7 @@ cameras:
 
 ### flat camera
 
-The **flat** camera is a shortcut to a view which can be produced by the other two cameras, but is simpler to setup and use. It has no 3D perspective at all, and shows a perfectly flat top-down view of your map.
+**flat**平面相机是一个快捷方式，其也可以由另外两个摄像机产生，但更易于安装和使用的图。它根本没有3D透视图，并且可以完美地显示您的地图的俯视图。
 
 ```yaml
 cameras:
