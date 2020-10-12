@@ -20,7 +20,7 @@ layers:
 
 一个绘制组必须指定该风格样式用来绘制一个特征，它可以通过两种方式做到这一点:
 
- 1. 一个绘制组可以包含一个名为 `style` 参数， whose value names a _style_ (either a [built-in _style_](../Overviews/Styles-Overview.md#draw-styles) or one defined in the `styles` element of the scene file). For example:
+ 1. 一个绘制组可以包含一个名为 `style` 参数， (其他 [built-in _style_](../Overviews/Styles-概述.md#draw-styles) 或者一个定义在场景文件中`styles`元素). 例如:
 
  ```yaml
  ...
@@ -29,6 +29,7 @@ layers:
          style: lines
          ... # more parameters follow
  ```
+ 
  2. If a _draw group_ does not contain a `style` parameter, the group's name is interpreted as the name of a _style_ (again, either a [built-in _style_](../Overviews/Styles-Overview.md#draw-styles) or one from the `styles` element).
 
  ```yaml
