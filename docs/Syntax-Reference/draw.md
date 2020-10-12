@@ -1,7 +1,7 @@
-*This is the technical documentation for Tangram's styling system. For a conceptual overview of the styling system, see the [Styles Overview](../Overviews/Styles-Overview.md).*
+*这是七巧板样式系统的技术文档。有关样式系统的概念概述，请参见 [Styles Overview](../Overviews/Styles-Overview.md).*
 
 #### `draw`
-`draw` is an optional element in a [layer](layers.md) or [sublayer](layers.md#sublayer-name). It provides one or more *draw groups* for rendering the features that match the _layer_ or _sublayer_ directly above it. These _draw groups_ are the sub-elements of the `draw` element, as in this example:
+`draw` [layer](layers.md) 或 [sublayer](layers.md#sublayer-name)的可选元素。 它提供一个或多个绘制组，用于渲染与其正上方的图层或子图层相匹配的要素。 这些绘制组是元素 `draw` 子元素, 如以下示例所示:
 ```yaml
 ...
 layers:
@@ -13,14 +13,14 @@ layers:
             another_draw_group:
                 ...
 ```
-A `draw` element can specify multiple groups, indicating that matching features should be drawn multiple times. In the example above, features that match the "water" layer will be drawn twice, once according to the style of `draw_group` and once with that of `another_draw_group`.
+`draw` 元素可指定多个组，这表明匹配特征应绘制多次。 另外，在上述的例子中，特征是匹配的 "water"层将被绘制两次, 根据风格 `draw_group` 绘制一次，然后根据风格`another_draw_group`再绘制一次。
 
 #### draw group
-The name of a _draw group_ can be any string. The sub-elements of a _draw group_ are parameters that determine various properties of how a feature will be drawn. These _style parameters_ are described in detail below.
+绘制组的名称可以是任何字符串。绘制组的子元素是确定如何绘制特征的各种属性的参数。这些样式参数将在下面详细描述。
 
-A _draw group_ must specify the _style_ that will be used to draw a feature. It can do this in two ways:
+一个绘制组必须指定该风格样式用来绘制一个特征，它可以通过两种方式做到这一点:
 
- 1. A _draw group_ may contain a parameter called `style` whose value names a _style_ (either a [built-in _style_](../Overviews/Styles-Overview.md#draw-styles) or one defined in the `styles` element of the scene file). For example:
+ 1. 一个绘制组可以包含一个名为 `style` 参数， whose value names a _style_ (either a [built-in _style_](../Overviews/Styles-Overview.md#draw-styles) or one defined in the `styles` element of the scene file). For example:
 
  ```yaml
  ...
