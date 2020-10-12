@@ -1,24 +1,24 @@
 # Walkthrough: Add a Tangram map to an Android application
 
-With the Tangram Android SDK, you can quickly add beautiful and useful 2D and 3D maps to an Android application. Tangram uses customizable scenes that enable fine control over almost every aspect of your map's appearance, including symbols, lighting, geometry, and feature labels. The Tangram Android SDK is [open source](https://github.com/tangrams/tangram-es), and supports several vector data formats.
+用 Tangram Android SDK, 您可以快速将精美实用的2D和3D地图添加到Android应用程序。 七巧板使用可自定义的场景，可以对地图外观的几乎每个方面进行精细控制，包括符号，照明，几何图形和要素标签。 Tangram Android SDK 是 [open source](https://github.com/tangrams/tangram-es), 并支持多种矢量数据格式。
 
-Follow this guide to add a Tangram map to your Android application. If you're looking for a simple way to add a pre-configured map and related geographic services to your application, you should check out the [Mapzen Android SDK](https://mapzen.com/documentation/android/).
+请按照本指南将七巧板地图添加到您的Android应用程序。如果您正在寻找一种简单的方法来向您的应用程序添加预配置的地图和相关的地理服务， 你应该去看看 [Mapzen Android SDK](https://mapzen.com/documentation/android/).
 
-The Tangram Android SDK can be used with any Android build system that supports Gradle. For this guide we will use [Android Studio](http://developer.android.com/sdk/index.html).
+Tangram Android SDK 可以使用任何Android构建系统，支持Gradle. 我们将使用本指南 [Android Studio](http://developer.android.com/sdk/index.html).
 
-> This guide will assume some knowledge of Android software development. If you want an introduction to writing Android applications, visit the [Android developer site](http://developer.android.com/training/index.html).
+> 本指南将假定您对Android软件开发有一定的了解。 如果你想了解如何编写Android应用程序, 访问 [Android developer site](http://developer.android.com/training/index.html).
 
 ### Run the Simple Map demo application
 
-First, let's look at a sample application that demonstrates simple usage of a Tangram map.
+首先，让我们看一个示例应用程序，该示例程序演示七巧板地图的简单用法。
 
-Start by downloading the repository of Tangram Android demos. You can do this in a terminal window with the following command:
+首先下载七巧板Android演示库。您可以使用以下命令在终端窗口中执行此操作：
 
 ```
 git clone --recursive https://github.com/tangrams/tangram-android-demos.git
 ```
 
-Next, import the project by opening Android Studio, choosing "Import project", and selecting the "tangram-android-demos" folder.
+接下来，通过打开Android Studio，选择“导入项目”并选择“ tangram-android-demos”文件夹来导入项目。
 
 With the project open, choose `simplemap` from the run menu and run the demo on a device or an emulator. Your device will show a map that responds to dragging, pinching, and rotating gestures.
 
