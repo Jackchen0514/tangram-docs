@@ -254,18 +254,19 @@ poi-icons:
 
 #### `color`
 
-Required* RGB _[number, number, number]_, RGBA _[number, number, number, number]_, _CSS color_, or _stops_. Can also be a _function_ which returns a color. RGB/RGBA value range is 0-1. No default.
+需要 RGB _[number, number, number]_, RGBA _[number, number, number, number]_, _CSS color_, 或 _stops_. 也可以是返回颜色的 _function_。 RGB/RGBA 值范围是 0-1. 没有默认值。
 
-Applies to `points`, `polygons`, and `lines`. (For `text`, see [fill](draw.md#fill).) Specifies the vertex color of the feature. This color will be passed to any active shaders and used in any light calculations as "color".
+适用于 `points`, `polygons`, 和 `lines`. (有关 `text` 的信息, 请参见 [fill](draw.md#fill).) 指定要素的顶点颜色。该颜色将传递给任何活动的着色器，并在任何光照计算中用作"颜色"。
 
-_CSS colors_ include the following color formats, as specified in the [W3C's Cascading Style Sheets specification](http://www.w3schools.com/cssref/css_colors_legal.asp):
 
-- _named colors_: `red`, `blue`, `salmon`, `rebeccapurple`
-- _hex colors_: `"#fff"`, `"#000"`, `"#9CE6E5"`
-- _RGB colors_: `rgb(255, 190, 0)`
-- _RGBA colors_**: `rgb(255, 190, 0, .5)`
-- _HSL colors_: `hsl(180, 100%, 100%)`
-- _HSL colors_**: `hsla(180, 100%, 100%, 50%)`
+CSS颜色包括 [W3C's Cascading Style Sheets specification](http://www.w3schools.com/cssref/css_colors_legal.asp)定的以下颜色格式:
+
+- _命名的颜色_: `red`, `blue`, `salmon`, `rebeccapurple`
+- _十六进制颜色_: `"#fff"`, `"#000"`, `"#9CE6E5"`
+- _RGB颜色_: `rgb(255, 190, 0)`
+- _RGBA颜色_: `rgb(255, 190, 0, .5)`
+- _HSL颜色_: `hsl(180, 100%, 100%)`
+- _HSL颜色_: `hsla(180, 100%, 100%, 50%)`
 
 *`color` is not required if a style is used which specifies a shader with a _color block_ or a _filter block_. See [shaders: blocks](shaders.md#blocks).
 
@@ -275,7 +276,7 @@ _CSS colors_ include the following color formats, as specified in the [W3C's Cas
 ```yaml
 draw:
     polygons:
-        color: [.7, .7, .7]
+        color: [.7, .7, .7] # rgb 数值 number/255
 ```
 
 ```yaml
