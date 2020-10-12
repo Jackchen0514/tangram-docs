@@ -1,18 +1,19 @@
-*This is an overview of Tangram's styling system. For a complete technical reference of the custom style-creation system, see [styles](../Syntax-Reference/styles.md), and for all the technical details of drawing with those styles, see [draw](../Syntax-Reference/draw.md).*
+*这是七巧板的样式系统的概述。有关自定义样式创建系统的完整技术参考，请参见 [styles](../Syntax-Reference/styles.md)，有关具有这些样式的图形的所有技术细节，请参见[draw](../Syntax-Reference/draw.md).*
 
 ## draw styles
 
-Draw styles are referenced in two places in the scene file: when defining custom [styles](../Syntax-Reference/styles.md) and again in [draw](../Syntax-Reference/draw.md) groups.
+在场景文件中的两个位置引用了绘画样式: 当自定义 [styles](../Syntax-Reference/styles.md) 以及在 [draw](../Syntax-Reference/draw.md) 组中再次引用。
 
-Tangram currently has five built-in _base draw styles_: `polygons`, `lines`, `points`, `text`, and `raster`. Each draw style displays data in a different way, and some of them require specific data types and properties.
+七巧板目前有五个内置基本的绘制样式: `polygons`, `lines`, `points`, `text`, 和 `raster`. 每种绘制样式均以不同的方式显示数据，其中一些样式需要特定的数据类型和属性。
 
-For each _base draw style_, `blend` mode _combo styles_ are also available with the naming pattern "blend_base", eg `translucent_polygons`, `overlay_lines` etc. For more information see [`blend`](styles.md#blend-combo-styles).
+对于每种基本绘制样式, 还可以使用`blend` 模式组合样式以及命名参数为 "blend_base", 例如 `translucent_polygons`, `overlay_lines` 等。
+相关的更多信息，请查看 [`blend`](styles.md#blend-combo-styles).
 
 #### `polygons`
-The `polygons` _draw style_ tessellates and extrudes vector shapes into 3D geometry. It requires polygonal data. See [`polygons`](#polygons-1).
+`polygons` 镶嵌和拉伸矢量图形转换成3D几何形状。 它需要多边形数据。请参阅 [`polygons`](#polygons-1).
 
 #### `lines`
-The `lines` _draw style_ can turn either polygonal or line data into lines. See [`lines`](#lines-1).
+`lines` 将多边形或线数据转换为线. 请参阅 [`lines`](#lines-1).
 
 #### `points`
 The `points` _draw style_ draws a filled circle at the location of the data point. It can work with point data, lines, or polygons. Points will "collide" with each other, with only the winner being drawn, determined by the [`priority`](../Syntax-Reference/draw.md#priority) draw parameter.
