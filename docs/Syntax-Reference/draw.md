@@ -20,7 +20,7 @@ layers:
 
 一个绘制组必须指定该风格样式用来绘制一个特征，它可以通过两种方式做到这一点:
 
- 1. 一个绘制组可以包含一个名为 `style` 参数， (其他 [built-in _style_](../Overviews/Styles-概述.md#draw-styles) 或者一个定义在场景文件中`styles`元素). 例如:
+1. 一个绘制组可以包含一个名为 `style` 参数， (其他 [built-in _style_](../Overviews/Styles-概述.md#draw-styles) 或者一个定义在场景文件中`styles`元素). 例如:
 
  ```yaml
  ...
@@ -30,7 +30,7 @@ layers:
          ... # more parameters follow
  ```
  
- 2. If a _draw group_ does not contain a `style` parameter, the group's name is interpreted as the name of a _style_ (again, either a [built-in _style_](../Overviews/Styles-Overview.md#draw-styles) or one from the `styles` element).
+2. If a _draw group_ does not contain a `style` parameter, the group's name is interpreted as the name of a _style_ (again, either a [built-in _style_](../Overviews/Styles-Overview.md#draw-styles) or one from the `styles` element).
 
  ```yaml
  ...
@@ -1061,7 +1061,7 @@ draw:
 
 ## `font` parameters
 
-The `font` object has a number of unique parameters. None are required, but least one must be specified for a `text` style to be drawn.
+`font` 对象有许多唯一的参数. 不是都需要, 但必须至少指定一种 `text` 绘制样式。
 
 ```yaml
 draw:
@@ -1077,14 +1077,14 @@ draw:
 ```
 
 #### `family`
-Optional _string_, naming a typeface. Sets the font-family of the label. Default is `Helvetica`.
+可选字符串，命名字体。设置标签的字体系列。默认值为 `Helvetica`.
 
-`family` can be any typeface available to the operating system. The default will be used as a fallback if the other specified families are not available.
+`family` 可以是操作系统可用的任何字体。如果其他指定系列不可用，则默认值将用作备用。
 
 #### `fill`
-Optional _color_ or _stops_. Follows the specs of [color](draw.md#color). Default is `white`.
+可选颜色或停止点。遵循 [color](draw.md#color). 默认值为 `white`.
 
-Sets the fill color of the label.
+设置标签的填充颜色。
 
 ```yaml
 font:
@@ -1096,7 +1096,7 @@ font:
 ```
 
 #### `size`
-Optional _number_, _stops_, or _function_, specifying a font size in `px`, `pt`, or `em`. Sets the size of the text. Default is `12`. Default units are `px`.
+可选数字，停止，或功能， 在指定的字体大小单位 `px`, `pt`, or `em`. 设置文本的大小。默认值为 `12`. 默认单位为 `px`.
 
 ```yaml
 font:
@@ -1117,9 +1117,9 @@ font:
 ```
 
 #### `stroke`
-Optional _{color, width}_ or _stops_. _colors_ follow the specs of [color](draw.md#color). _width_ may be an _int_ or _stops_. No default.
+可选的 _{color, width}_ 或 _stops_. 颜色遵循的规范 [color](draw.md#color). _width_ 可以是 _int_ 或 _stops_. 没有默认值。
 
-Sets the stroke color and width of the label. Width is interpreted as pixels.
+设置标签的笔触颜色和宽度。宽度被解释为像素。
 
 (To draw a stroke around a line or point, use [`outline`](draw.md#outline); to draw a stroke around a polygon, create two separate `draw` groups for `polygons` and `lines`.)
 
@@ -1135,14 +1135,14 @@ font:
 ```
 
 #### `style`
-Optional _string_, specifying a font style. No default.
+可选的string，指定字体样式。没有默认值。
 
-Currently supports only `italic`.
+目前仅支持 `italic`.
 
 #### `transform`
-Optional _string_, one of `capitalize`, `uppercase`, or `lowercase`. Sets a text transform style. No default.
+可选的字符串, `capitalize`, `uppercase`, or `lowercase`. 设置文本转换大小写。没有默认值。
 
-`capitalize` will make the first letter in each word uppercase. `uppercase` and `lowercase` will change all letters to be uppercase and lowercase, respectively.
+`capitalize` 将每个单词的第一个字母大写。 `uppercase` 和 `lowercase` 所有字母分别更改为大写和小写。
 
 #### `weight`
-Optional _string_ or _number_. Strings may be one of `lighter`, `normal`, `bold`, or `bolder`; integers may be any CSS-style font weight from `100`-`900`. Default is `normal`.
+可选的字符串或数字。 字符串可以是`lighter`, `normal`, `bold`, or `bolder`之一; 整数可以是任何CSS风格的字体粗细的 `100`-`900`。 默认值为`normal`。
