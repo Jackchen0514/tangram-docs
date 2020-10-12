@@ -16,29 +16,29 @@
 `lines` 将多边形或线数据转换为线. 请参阅 [`lines`](#lines-1).
 
 #### `points`
-The `points` _draw style_ draws a filled circle at the location of the data point. It can work with point data, lines, or polygons. Points will "collide" with each other, with only the winner being drawn, determined by the [`priority`](../Syntax-Reference/draw.md#priority) draw parameter.
+`points` 绘制一个实心圆在数据点的位置。它可以与点数据，线或面一起使用。 点将彼此“碰撞”, 仅由获胜者根据 [`priority`](../Syntax-Reference/draw.md#priority) 确定参数。
 
-_[JS only]_ Only points from the same datasource will collide with each other.
+_[JS only]_ 仅来自同一数据源的点会相互碰撞。
 
-Technically, this draw style creates a small quad, which is then colored with a default shader which draws a dot. This behavior can be overridden with either a custom shader or a texture.
+从技术上讲，此绘制样式将创建一个小的四边形，然后使用默认的着色器为该四边形着色，以绘制一个点。可以使用自定义着色器或纹理覆盖此行为。
 
-See [`points`](#points-1).
+请参阅 [`points`](#points-1).
 
-#### `text`
-The `text` _draw style_ draws text labels at a given point. It can work with point, line, or polygon data. When used with lines, the label will be drawn along the line. When used with polygons, the label will be drawn at the polygon's centroid. Text labels will "collide" with each other, with only the winner being drawn, determined by the [`priority`](../Syntax-Reference/draw.md#priority) draw parameter.
+#### `text
+`text` 在给定的点绘制文本标签。 它可以使用点，线或面数据。 与线条一起使用时，标签将沿着线条绘制。 与多边形一起使用时，标签将绘制在多边形的中心处。文本标签将彼此“碰撞”，仅绘制获胜者，具体取决于 [`priority`](../Syntax-Reference/draw.md#priority) 参数。
 
-_[JS only]_ Only text elements from the same datasource will collide with each other.
+_[JS only]_ 仅来自同一数据源的文本元素会相互冲突。
 
-See [`text`](#text-1).
+请参阅 [`text`](#text-1).
  
 #### `raster`
-The `raster` _draw style_ draws one tile-sized square per tile and paints it with the appropriate tile from a `Raster` data source. See [`raster`](#raster-1).
+`raster` 绘制一个瓷砖尺寸的正方形瓷砖每与从相应的砖描绘 `Raster`的数据源。请参阅 [`raster`](#raster-1).
 
 ## Using Styles
 
-These built-in _draw styles_ are used as the foundation for all custom styling in Tangram. When writing an inline style under a `layer`, they are referenced in _draw groups_, in one of two ways:
+这些内置的绘制样式用作七巧板中所有自定义样式的基础。在下方编写内联样式时`layer`, 可以通过以下两种方式之一在绘图组中引用它们:
 
-A _draw group_ with a custom name may reference a _style_ by name with the `style` parameter:
+一个自定义名称的绘制组可以引用`style`参数名字的样式:
 
 ```yaml
 roads:
@@ -48,7 +48,7 @@ roads:
             color: blue
 ```
 
-Or, if a _draw group_ is named for one of the _draw styles_, the `style` parameter may be omitted:
+或者, 如果一个绘制组用绘制样式作为名字，那么`style`参数可以省略:
 
 ```yaml
 roads:
@@ -59,7 +59,7 @@ roads:
             color: red
 ```
 
-By defining multiple _draw groups_ the same feature may be drawn using multiple styles simultaneously:
+通过定义多个绘制组， 可以同时使用多种样式来绘制相同的特征：
 
 ```yaml
 roads:
@@ -70,7 +70,7 @@ roads:
             color: red
 ```
 
-When defining a custom style, the built-in _draw groups_ are explicitly referenced under the new style name with the `base` parameter:
+定义自定义样式时，内置绘制组在新样式名称下使用 `base` 参数明确引用:
 
 ```yaml
 styles:
@@ -78,69 +78,69 @@ styles:
         base: polygons
 ```
 
-In this way, custom styles may "extend" the behavior or the built-in _draw styles_.
+这样，自定义样式可以"扩展"行为或内置绘制样式。
 
 ## polygons
-The *polygons* draw style requires a datasource containing coordinates connected by lines into a "closed" shape. If the lines of the polygon start and stop at different places, it is an "open" shape, and the `polygons` draw style can't use it. But if a sequence of lines connects back onto its own starting point, it is considered "closed", and can be extruded into a 3D shape.
+多边形绘制样式风格需要含有可通过线连接成一个"闭合"形状坐标的数据源。 如果多边形的线在不同位置开始和停止，则它是“开放”形状，那么 `polygons` 绘制样式无法使用它。 但是，如果一系列线连接回到其自己的起点，则将其视为"封闭"的，并且可以将其拉伸为3D形状。
 
 #### `polygons` parameters
-Styles which are extensions of the `polygons` draw style can take the following parameters:
+作为 `polygons` 绘制样式的扩展可以采用以下参数:
 
 - `texcoords`
 - `animated`
 - `blend`
-- `materials` : see [materials](../Syntax-Reference/materials.md)
-- `shaders`: see [shaders](../Syntax-Reference/shaders.md)
+- `materials` : 查看 [materials](../Syntax-Reference/materials.md)
+- `shaders`: 查看 [shaders](../Syntax-Reference/shaders.md)
 
 #### `polygons` draw group requirements
-[Draw groups](../Syntax-Reference/draw.md#draw-group) which use the `polygons` draw style must specify, at minimum, the following parameters in order to be drawn:
+使用 `polygons` 绘制样式的[Draw groups](../Syntax-Reference/draw.md#draw-group) 必须至少指定以下参数才能进行绘制:
 
 - [color](../Syntax-Reference/draw.md#color)
 
 ## lines
-The *lines* style requires a datasource containing connected coordinates. Thus it can accept either linear or polygonal input data. It draws a rectangle along each line segment, and can optionally draw special [`join`](../Syntax-Reference/draw.md#join) and [`cap`](../Syntax-Reference/draw.md#cap) styles.
+*lines*样式需要含有连接坐标的数据源。因此，它可以接受线性或多边形输入数据。它沿着每个线段绘制一个矩形，并且可以选择绘制特殊样式 [`join`](../Syntax-Reference/draw.md#join) 和 [`cap`](../Syntax-Reference/draw.md#cap)
 
 #### `lines` parameters
-Styles which are extensions of the `lines` draw style can take the following parameters:
+作为`lines` 绘制样式的扩展的样式可以采用以下参数:
 
 - `texcoords`
 - `animated`
 - `blend`
-- `materials` : see [materials](../Syntax-Reference/materials.md)
-- `shaders`: see [shaders](../Syntax-Reference/shaders.md)
+- `materials` : 查看 [materials](../Syntax-Reference/materials.md)
+- `shaders`: 查看 [shaders](../Syntax-Reference/shaders.md)
 
 #### `lines` draw group requirements
-[Draw groups](../Syntax-Reference/draw.md#draw-group) which use the `lines` draw style must specify, at minimum, the following parameters in order to be drawn:
+使用 `lines` 绘制样式的 [Draw groups](../Syntax-Reference/draw.md#draw-group) 必须至少指定以下参数才能进行绘制:
 
 - [color](../Syntax-Reference/draw.md#color)
 - [width](../Syntax-Reference/draw.md#width)
 
 ## points
-The `points` draw style is used to draw dots or sprites at points of interest. It also builds a rectangle at a point, and can be colored in a variety of ways:
+`points` 绘制样式被用来在感兴趣的`point`上画点或者画精灵。 它还可以在一个`point`上创建矩形， 并且有很多种着色方式:
 
-- with a special shader designed to draw a circle
-- with a `texture`
-- with a `sprite` from a `texture`
+- 用专门的着色画点的圈
+- 使用 `texture`
+- 使用 `sprite` 从这 `texture`
 
-If the point is used to draw a dot, the size and color of this circle can be specified in the scene file with the `size` and `color` parameters.
+如果使用`point`画点，则可以在场景文件中使用 `size` 和 `color` 参数指定该点的圈大小和颜色。
 
-`points` and `text` have a special relationship, which is useful for creating custom labels and icons. They will also collide with each other – the "winner" is drawn and the "loser" is not, as determined by the [`priority`](../Syntax-Reference/draw.md#priority) draw parameter.
+`points` 和 `text` 具有特殊的关系, 这对于创建自定义标签和图标很有用。 它们也将相互碰撞-由  [`priority`](../Syntax-Reference/draw.md#priority) 参数确定“赢家”被抽出，而“失败者”未被抽出。
 
-_[JS only]_ Only points and text elements from the same datasource will collide with each other.
+_[JS only]_ 仅来自同一数据源的点和文本元素会相互碰撞。
 
 #### `points` draw group requirements
-[Draw groups](../Syntax-Reference/draw.md#draw-group) which use the `points` draw style must specify, at minimum, the following parameters in order to be drawn:
+`points` 必须至少指定以下参数才能进行绘制:
 
 - [color](../Syntax-Reference/draw.md#color)
 - [size](../Syntax-Reference/draw.md#size)
 
 ## text
-The `text` style is similar to the `sprites` style, in that it builds a rectangle at a point. However, instead of being colored with a custom texture, this style builds its own texture, containing text.
+`text` 类似于 `sprites` 风格, 因为它在一个点建立一个矩形。但是，此样式不会使用自定义纹理进行着色，而是构建自己的包含文本的纹理。
 
-The content of the text is based on the [`text_source`](../Syntax-Reference/draw.md#text-source) parameter. The style of the text is specified by the [`font`](../Syntax-Reference/draw.md#font-parameters) parameters.
+文本的内容基于 [`text_source`](../Syntax-Reference/draw.md#text-source) 参数。 文本的样式由 [`font`](../Syntax-Reference/draw.md#font-parameters) 参数指定。
 
 #### `text` parameters
-Styles which are extensions of the `text` style can take the following special parameters:
+`text` 样式扩展参数如下:
 
 - [`font`](../Syntax-Reference/draw.md#font-parameters): Sets font's typeface, style, size, color, and outline.
 - [`text_source`](../Syntax-Reference/draw.md#text_source): Determines label text, defaults to the feature's `name` property.
@@ -154,25 +154,25 @@ Styles which are extensions of the `text` style can take the following special p
 - [`collide`](../Syntax-Reference/draw.md#collide): Sets whether label collides with other labels or points/sprites.
 - [`move_into_tile`](../Syntax-Reference/draw.md#move_into_tile): Increases number of labels that will display, by moving some to fit within tile bounds (JS-only)
 
-These parameters are described in the [draw](../Syntax-Reference/draw.md) entry.
+这些参数在 [draw](../Syntax-Reference/draw.md) 条目中.
 
 #### `text` draw group requirements
-[Draw groups](../Syntax-Reference/draw.md#draw-group) which use the `text` draw style must specify, at minimum, the following parameters in order to be drawn:
+使用 `text` 必须至少指定以下参数:
 
 - [font](../Syntax-Reference/draw.md#font)
 
-## `raster`
-The `raster` style renders [Raster data sources](../Syntax-Reference/sources.md#Raster), such as traditional raster tiles.
+## `raster` 栅格
+`raster` 样式渲染 [Raster data sources](../Syntax-Reference/sources.md#Raster), 如传统的光栅像素块。
 
-Note that `Raster` sources can also be used by other styles, by "attaching" the sources to the styles with the [rasters](../Syntax-Reference/sources.md#rasters) parameter. See the [Rasters Overview](Raster-Overview.md).
+请注意， `Raster` 通过使用 [rasters](../Syntax-Reference/sources.md#rasters) 参数将源“附加”到样式，源也可以被其他样式使用。 请参阅 [Rasters Overview](Raster-Overview.md).
 
 ## style composition with `mix`
 
-The `mix` parameter copies the properties of the named style (or styles) to a new style. In this way, new styles can be "forked" from existing styles.
+`mix` 参数将命名样式（或多个样式）的属性复制到新样式。 这样，可以从现有样式中 "forked" 新样式。
 
-This allows styles to be made which vary only slightly from each other, without having to manually duplicate everything else in the style code. It also allows a style to act as a "base" or "foundation" style, to be mixed into others.
+这样就可以制作样式，它们之间的差异仅很小，而不必手动复制样式代码中的所有其他内容。它还允许一种样式充当"base"样式或"foundation"样式，并与其他样式混合。
 
-The following example creates a style named "geo2" by copying all the properties of the "geo" style:
+以下示例通过复制"geo"样式的所有属性来创建名为"geo2"的样式：
 
 ```yaml
 styles:
@@ -181,14 +181,13 @@ styles:
     geo2:
         mix: geo
 ```
-
-These two styles are identical.
+这两种样式是相同的。
 
 #### modifications
 
-Once you've mixed in a style, you can add or modify any properties you like.
+混合样式后，您可以添加或修改所需的任何属性。
 
-For example, you could create a new style called styleB that "inherits from" an existing style called styleA, and then adds custom shader blocks:
+例如，您可以创建一个名为styleB的新样式，该样式"继承自"一个称为styleA的现有样式，然后添加自定义着色器块:
 
 ```yaml
 styleB:
@@ -198,35 +197,33 @@ styleB:
          color: ...
 ```
 
-Or you could mix in an existing style, but disable lighting:
+或者您可以混合使用现有样式，但禁用照明:
 
 ```yaml
 fancy-but-no-lighting:
     base: fancy
     lighting: false
 ```
-
-You can even modify the mix'ed-in style's `base`. For example, if you have a polygon-based style with custom shader blocks that you want to apply to lines instead, you can create a line-based version like this:
+您甚至可以修改混合样式`base`。例如，如果您有一个基于多边形的样式，并且具有要应用于行的自定义着色器块，则可以创建基于行的版本，如下所示:
 
 ```yaml
 fancy-lines:
     mix: fancy-polygons
     base: lines # change the base to lines
 ```
-
-Note that in this case, any properties which were special to the `polygons` draw style will still be copied, but will be ignored by the renderer.
+请注意，在这种情况下，`polygons`仍将复制绘图样式特有的任何属性，但渲染器将忽略它们。
 
 
 #### combinations
 
-The `mix` parameter can also be given a list of styles – this makes it possible to mix multiple effects together, e.g. to apply both the windows and halftone effects simultaneously:
+`mix`参数还可以给出样式列表-这使得它可以将多个特效混合在一起，例如，同时应用Windows和半色调效果:
 
 ```yaml
 halftone-windows:
     mix: [ windows, halftone ]
 ```
 
-Styles in a list will be copied in the order listed – so if a property is common to multiple named styles, styles named last in the list will take precedence.
+列表中的样式将按照列出的顺序进行复制-因此，如果属性是多个命名样式的公用属性，则列表中最后一个命名的样式将优先。
 
 ```yaml
 styles:
@@ -234,4 +231,4 @@ styles:
         mix: [styleA, styleB, styleC]
 ```
 
-Here, styleC's properties will override any it has in common with the other listed styles.
+在这里，styleC的属性将覆盖与其他列出的样式相同的任何属性。
