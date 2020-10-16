@@ -1,10 +1,10 @@
-Tangram is designed to work with vector tiles in a number of formats. Data sources are specified in the [`sources`](../Syntax-Reference/sources.md) block of Tangram's scene file. Once a datasource is specified, **filters** allow you to style different parts of your data in different ways.
+七巧板设计用于多种格式的矢量切片。 数据源在 [`sources`](../Syntax-Reference/sources.md) 七巧板的场景文件代码块中指定。 一旦指定了数据源， **filters** 可以让您以不同的方式设置数据的不同部分的样式
 
-The Tangram scene file filters data in two ways: with top-level **layer filters** and lower-level **feature filters**.
+七巧板场景文件以两种方式过滤数据: 顶层过滤器**layer filters** 和 底层特征过滤器 **feature filters**.
 
 # Layer filters
 
-Vector tiles typically contain top-level structures which can be thought of as "layers" – inside a GeoJSON file, these would be the _FeatureCollection_ objects. Inside a Tangram scene file, the [`layers`](../Syntax-Reference/layers.md) object allows you to split the data by layer, by matching against the layer name.
+矢量图块通常包含可被视为 "layers" 的顶层结构-在GeoJSON文件中, 这些将是FeatureCollection对象。在七巧板场景文件中，  [`layers`](../Syntax-Reference/layers.md) 对象允许您通过与图层名称匹配来按图层拆分数据。
 
 ```yaml
 layers:
@@ -15,7 +15,7 @@ layers:
         draw: ...
 ```
 
-Specifying `layer: roads` in the [`data`](../Syntax-Reference/layers.md#data) block matches this GeoJSON object:
+`layer: roads` 在 [`data`](../Syntax-Reference/layers.md#data) 块中指定与此GeoJSON对象匹配：
 
 ```json
 {"roads":
@@ -27,7 +27,7 @@ Specifying `layer: roads` in the [`data`](../Syntax-Reference/layers.md#data) bl
 
 ## Layer name shortcut
 
-If a `layer` filter is not specified, Tangram will attempt to use the _layer name_ as the filter. In this example, the layer name "roads" matches a layer in the data:
+如果`layer`未指定过滤器，则七巧板将尝试使用图层名称作为过滤器。在此示例中，图层名称 "roads" 与数据中的图层匹配:
 
 ```yaml
 layers:
@@ -39,8 +39,7 @@ layers:
 
 # Feature filters
 
-Once a top-level `layer` filter has been applied, feature-level [`filter`](../Syntax-Reference/layers.md#filter) objects can be defined to filter by feature properties, in order to further narrow down the data of interest and refine the styles applied to the data.
-
+一旦应用了顶层 `layer` 过滤器, [`filter`](../Syntax-Reference/layers.md#filter) 就可以定义要素对象以按要素属性进行过滤，以进一步缩小所需数据的范围并优化应用于该数据的样式。
 ```yaml
 layers:
     roads:
@@ -51,26 +50,25 @@ layers:
                 kind: highway
             draw: ...
 ```
+这里，在"osm"数据源中"roads"匹配一个顶层的"roads"。它有一个应用于'roads'层中所有要素的'style'块，除非被覆盖，否则用作一种'default'样式。
 
-Here, a top-level layer named "roads" matches the "roads" layer in the "osm" data source. It has a `style` block, which will apply to all features in the "roads" layer unless it is overridden, functioning as a kind of "default" style.
-
-Then, a _sublayer_ named "highway" is declared, with its own `filter` and `draw`. Its `draw` block will apply only to roads which match its `filter` – in this case, those with the property "kind", with a value of "highway".
+然后，声明一个名为'highway'的子图层，并带有自己的`filter` 和 `draw`。它的'draw'块仅适用于与其匹配'filter'的属性为'kind',其值为'highway'的道路
 
 ## Inheritance
 
-Higher-level filters continue to apply at lower levels, which means that higher-level `draw` parameters will be inherited by lower levels, unless the lower level explicitly changes the `draw` parameters.
+较高级别的过滤器继续在较低级别上应用，这意味着较高级别的 `draw` 较高级别的过滤器继续在较低级别上应用，这意味着较高级别的 `draw` 参数。
 
-Using sublayers and inheritance, you may specify increasingly specific filters and draw styles to account for as many special cases as you like.
+使用子图层和继承，您可以指定越来越具体的过滤器和绘制样式，以解决您喜欢的多种特殊情况。
 
 # Matching
 
-Each feature in a `layer` is first tested against each top-level `filter`, and if the feature's data matches the filter, that feature will be assigned any associated [`draw`](../Syntax-Reference/draw.md) styles, and passed on to any _sublayers_. If any _sublayer_ filters match the feature, that _sublayer_'s `draw` styles will overwrite any previously-assigned styling rules for those matching features, and so on down the chain of inheritance.
+在 `layer` 里的每个特征首先匹配每个顶层的'filter', 如果该要素的数据与过滤器匹配, 则会为该要素分配任何关联的 [`draw`](../Syntax-Reference/draw.md) 样式, 并将其传递给任何子曾. 如果任何子层过滤器与功能匹配, 则该子层的 `draw` 样式将覆盖那些匹配特征的所有先前分配的样式规则，依此类推。
 
-Feature filters can match any named feature property in the data, as well as a few special _reserved keywords_.
+特征过滤器可以匹配数据中任何命名的特征属性，以及一些特殊的保留关键字。
 
 ## Feature properties
 
-Feature properties in a GeoJSON datasource are listed in a JSON member specifically named "properties":
+GeoJSON数据源中的要素属性在特别称为"properties"的JSON成员中列出:
 
 ```json
 {
@@ -83,9 +81,9 @@ Feature properties in a GeoJSON datasource are listed in a JSON member specifica
     }
 ```
 
-Analogous property structures exist in other data formats such as TopoJSON and Mapbox Vector Tiles. Tangram makes these structures available to `filter` blocks by property name, and also to any JavaScript filter functions under the `feature` keyword.
+类似的属性结构也存在于其他数据格式中，例如TopoJSON和Mapbox Vector Tiles。Tangram使这些结构可按`filter`属性名称用于块，也可用于'feature'关键字下的任何JavaScript过滤器函数。
 
-The json feature above will match these two filters:
+上面的json功能将匹配以下两个过滤器:
 
 ```yaml
 filter:
@@ -94,30 +92,30 @@ filter:
 filter: function() { return feature.kind == "commercial"; }
 ```
 
-The simplest type of feature filter is a statement about one named property of a feature.
+特征过滤器最简单的类型是有关特征的一个命名属性的声明。
 
-A filter can match an exact value:
+过滤器可以匹配精确值:
 
 ```yaml
 filter:
     kind: residential
 ```
 
-any value in a list:
+列表中的任何值:
 
 ```yaml
 filter:
     kind: [residential, commercial]
 ```
 
-or a value in a numeric range:
+或数值范围内的值:
 
 ```yaml
 filter:
     area: { min: 100, max: 500 }
 ```
 
-A Boolean value of "true" will pass a feature that contains the named property, ignoring the property's value. A value of "false" will pass a feature that does _not_ contain the named property:
+布尔值"true"将传递包含命名属性的功能，而忽略该属性的值。值为"false"将传递不包含命名属性的功能:
 
 ```yaml
 filter:
@@ -125,27 +123,27 @@ filter:
     area: false
 ```
 
-To match a property whose value is a boolean, use the list syntax:
+要匹配其值为布尔值的属性，请使用列表语法:
 
 ```yaml
 filter:
     boolean_property: [true]
 ```
 
-A feature filter can also evaluate one or more properties in a JavaScript function:
+功能过滤器还可以评估JavaScript函数中的一个或多个属性:
 
 ```yaml
 filter:
     function() { return feature.area > 100000 }
 ```
 
-For example, let's say we have a feature with a single property called "height":
+例如，假设我们有一个功能，该功能具有一个称为"height"的属性:
 
 ```json
 { "type":"Feature", "properties":{ "height":200 } }
 ```
 
-This feature will match these filters:
+此功能将与以下过滤器匹配:
 
 ```yaml
 filter: { height: 200 }
@@ -156,7 +154,7 @@ filter: function() { return feature.height >= 100; }
 filter: function() { return true; }
 ```
 
-and will not match these filters:
+并且将不符合以下过滤条件:
 
 ```yaml
 filter: { height: 100 }
@@ -169,11 +167,11 @@ filter: function() { return false; }
 
 ## Keyword properties
 
-The keyword `$geometry` matches the feature's geometry type, for cases when a FeatureCollection includes more than one type of kind of geometry. Valid geometry types are:
+关键词`$geometry`匹配几何特征类型，有这样的情况当一个FeatureCollection包含多于一种几何类型，有效的几何类型为:
 
-- `point`: matches `Point`, `MultiPoint`
-- `line`: matches `LineString`, `MultiLineString`
-- `polygon`: matches `Polygon`, `MultiPolygon`
+- `point`: 匹配 `Point`, `MultiPoint`
+- `line`: 匹配 `LineString`, `MultiLineString`
+- `polygon`: 匹配 `Polygon`, `MultiPolygon`
 
 ```yaml
 filter: { $geometry: polygon }                      # matches polygons only
@@ -183,7 +181,7 @@ filter: { $geometry: [point, line] }                # matches points and lines, 
 filter: function() { return $geometry === 'line' }  # matches lines only
 ```
 
-The keyword `$layer` matches the feature's layer name, for cases when a data layer includes more than one source layer. In the case below, a data layer is created from two source layers, which can then be separated again by layer for styling:
+在数据层包含多个源层的情况下，关键字`$layer`与特征的层名称匹配。在以下情况下，将从两个源层创建一个数据层， 然后可以再次将它们分割为样式:
 
 ```yaml
 labels:
@@ -196,7 +194,7 @@ labels:
             ...
 ```
 
-The keyword `$zoom` matches the current zoom level of the map. It can be used with specific values, or with the `min` and `max` parameters.
+关键字`$zoom` 与地图的当前缩放级别匹配。 它可以与特定值或 `min` 和 `max` 参数一起使用。
 
 ```yaml
 filter: { $zoom: 14 }                       # matches only zoom 14
@@ -212,7 +210,8 @@ filter: function() { return $zoom <= 10 }   # matches zooms 10 and below
 
 ## `label_placement`
 
-The special `label_placement` property is given only to _point_ geometries created by setting `generate_label_centroids` on a non-tiled datasource to `true`. This option creates a new "centroid" _point_ feature in the geometric center of each polygon in the datasource. Then, with `label_placement` set to `true`, a single label may be drawn in the center of each polygonal feature, instead of one label per tile, which is the default behavior. To add these centroid _points_ to a datasource, add the `generate_label_centroids` property to its [source] block:
+这个特殊的属性`label_placement`仅仅被用来点的几何形状，通过在非平铺的数据源上将`generate_label_centroids`设置为`true`。这个选项在数据源的每个多边形的几何中心创建了一个新的重心点。然后,
+将`label_placement`设置成`true`，可以在每个多边形要素的中心绘制一个标签，而不是每个图块一个标签，这是默认行为。在数据源中增加这些重心点，在 [source] 代码块中添加`generate_label_centroids`属性:
 
 ```yaml
 sources:
@@ -229,26 +228,24 @@ layers:
                 label_placement: true
 ```
 
-See [`generate_label_centroids`](../Syntax-Reference/sources.md#generate_label_centroids)
+请查阅 [`generate_label_centroids`](../Syntax-Reference/sources.md#generate_label_centroids)
 
 ## Dot notation
 
-Dot notation with `.` can be used to access nested feature properties, which may be encoded in a GeoJSON/TopoJSON source, or parsed from MVT stringified JSON properties. These properties can also be accessed through custom JS filter functions.
+点符号`.` 可以用于访问嵌套的要素属性，这些属性可以在GeoJSON / TopoJSON源中进行编码，也可以从MVT字符串化的JSON属性进行解析。也可以通过自定义JS过滤器功能访问这些属性。
 
-Given a feature property `a: { b: { c: 'test' } }`, this filter will match:
+给定一个属性 `a: { b: { c: 'test' } }`, 此过滤器将匹配:
 `filter: { a.b.c: test }`
 
-Feature property names that include a `.` can be escaped with `\.`, e.g. a feature property named `'d.e.f': 'escaped'` will match with:
-`filter: { d\.e\.f: escaped }`
+特征属性的名称中包含`.`可以通过`\.`来转义。例如，一个名为`'d.e.f': 'escaped'`特征属性可以用`filter: { d\.e\.f: escaped }`来匹配
 
-These could be mixed, e.g. a property `{ 'a.b': { c: 'mixed' }` would match with:
-`filter: { a\.b.c: mixed }`
+这些可以混合使用，例如， 某个属性`{ 'a.b': { c: 'mixed' }` 可以用`filter: { a\.b.c: mixed }`来匹配。
 
 ## Filter functions
 
 ### Range functions
 
-The filter functions `min` and `max` are equivalent to `>=` and `<` in a JavaScript function, and can be used in combination.
+过滤器函数 `min` 和 `max` 等效于JavaScript方法中的 `>=` 和 `<` , 并且可以组合使用。
 
 ```yaml
 filter:
@@ -263,54 +260,55 @@ filter:
 
 ### Array functions
 
-- `includes_any`: check if an array `a` contains one or more of the values `p`, `q`, `r`:
+- `includes_any`: 检查一个数组 `a` 是否包含一个或多个`p`, `q`, `r` 值:
 
 `filter: { a: { includes_any: [p, q, r] } }`
 
-For example:
+举个例子:
 
 ```yaml
 filter:
     kind: { includes_any: [bus, rail, road] }
 ```
 
-- `includes_all`: check if an array `a` contains the values `p`, `q`, AND `r`:
+- `includes_all`: 检查`a`数组是否包含所有`p`, `q`, `r`值: 
 
 `filter: { a: { includes_all: [p, q, r] } }`
 
-For example:
+举个例子:
 ```yaml
 filter:
-    kind: { includes_any: [bus, rail, road] }
+    kind: { includes_all: [bus, rail, road] }
 ```
 
 
 ### `px2`
 
-Range functions can also accept a special screen-space area unit called `px2`:
+范围功能还可以接受特殊的屏幕空间区域单位 `px2`:
 
 ```yaml
 filter: { area: { min: 500px2 } }
 ```
 
-This example filters the feature's area property by the number of _square mercator meters_ that cover a 500 pixel screen area at the current zoom level. This means that the area property must be in square mercator meters, as the property provided by Mapzen vector tiles is.
+本示例通过按当前缩放级别覆盖500像素屏幕区域的墨卡特米的数量来过滤特征的area属性。这意味着该区域属性必须为平方米墨卡特米，就像Mapzen矢量图块提供的属性一样。
 
-As with other pixel-based values in the scene file, the `px2` units are expressed in _logical pixels_ (or "CSS pixels"), meaning they are interpreted at a pixel density of 1, and are automatically scaled up for higher density displays.
+与场景文件中其他基于像素的值一样，`px2`单位以逻辑像素（或“ CSS像素”）表示，这意味着它们以1的像素密度进行解释，并自动按比例放大以显示更高的密度。
 
-The `px2` unit syntax can be used to simplify more cumbersome per-zoom filters.
+该`px2`单元的语法可用于简化更加麻烦每缩放滤波器。
 
-Note that a `px2` area filter can only be applied if the data source already contains a suitable area property – it does not need to be named area, as any property name can be specified in the filter, but it must already exist in the data source.
+请注意，`px2`只有在数据源已经包含适当的area属性的情况下，才可以应用area过滤器-不必将其命名为area，因为可以在过滤器中指定任何属性名称，但是它必须已经存在于数据源中。
+
 
 ## Boolean functions
 
-The following Boolean filter functions are also available:
+以下布尔过滤器功能也可用:
 
 - `not`
 - `any`
 - `all`
 - `none` (a combination of `not` and `any`)
 
-`not` takes a single filter object as its input:
+`not` 将单个过滤器对象作为其输入:
 
 ```yaml
 filter:
@@ -320,7 +318,7 @@ filter:
     not: { kind: [bar, pub] }
 ```
 
-`any`, `all`, and `none` take lists of filter objects:
+`any`, `all`, 和 `none` 获取过滤器对象列表:
 
 ```yaml
 filter:
@@ -342,7 +340,7 @@ filter:
 
 ### Lists imply `any`, Mappings imply `all`
 
-A _list_ of several filters is a shortcut for using the `any` function. These two filters are equivalent:
+几个过滤器的列表是使用该 `any` 功能的快捷方式。这两个过滤器是等效的:
 
 ```yaml
 filter: [ kind: minor_road, railway: true ]
@@ -353,7 +351,7 @@ filter:
         - railway: true
 ```
 
-A _mapping_ of several filters is a shortcut for using the `all` function. These two filters are equivalent:
+几个过滤器的映射是使用该`all`能的捷径。这两个过滤器是等效的:
 
 ```yaml
 filter: { kind: hamlet, $zoom: { min: 13 } }
@@ -366,7 +364,7 @@ filter:
 
 ## Matching collisions
 
-In some cases, filters at the same level may return overlapping results:
+在某些情况下，相同级别的过滤器可能会返回重叠的结果:
 
 ```yaml
 roads:
@@ -379,7 +377,8 @@ roads:
         draw: { lines: { color: blue } }
 ```
 
-In this case, "highways" are colored red, and "bridges" are blue. However, if any feature is both a "highway" _and_ a "bridge", it will match twice. Because YAML maps are technically "orderless", there's no way to guarantee that one of these styles will consistently be shown over the other. The solution here is to restructure the styles so that each case matches explicitly:
+在这种情况下，“高速公路”的颜色为红色，"桥梁"的颜色为蓝色。但是，如果任何特征既是"高速公路"又是"桥梁"，则它将匹配两次。由于YAML映射在技术上是"无序的"，因此无法保证其中一种样式会始终显示在另一种样式上。这里的解决方案是重组样式，以便每种情况都明确匹配:
+
 
 ```yaml
 roads:
